@@ -9,6 +9,6 @@ CATIA
 Inventor
 1. Save Automating Drawing Exports as PDF in Inventor.ivb on your computer.
 2. Open Inventor VBA Editor (Alt + F11).
-3. Import Automating Drawing Exports as PDF in Inventor.ivb on as new model.
+3. Import Automating Drawing Exports as PDF in Inventor.ivb as new model.
 4. Update the "folderPath".
 5. Run the macro to export all ".idw" files in the folder as ".pdf".
