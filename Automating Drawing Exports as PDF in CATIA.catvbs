@@ -1,0 +1,40 @@
+Sub CATMain()
+Dim CATIA
+Set CATIA = CreateObject("CATIA.Application")
+
+Dim folderPath
+folderPath = "C:\folderPath\"
+
+If Right(folderPath, 1) <> "\" Then folderPath = folderPath & "\"
+
+Dim fso
+Set fso = CreateObject("Scripting.FileSystemObject")
+
+Dim file, fileName, doc, pdfFileName
+
+' Loop through all files in the folder
+For Each file In fso.GetFolder(folderPath).Files
+    fileName = file.Name
+    If LCase(Right(fileName, 11)) = ".catdrawing" Then
+        ' Open the drawing file
+        Set doc = CATIA.Documents.Open(folderPath & fileName)
+
+        ' Define PDF file name
+        pdfFileName = folderPath & Replace(fileName, ".CATDrawing", ".pdf")
+
+        ' Export as PDF
+        doc.ExportData pdfFileName, "pdf"
+
+        ' Close the document
+        doc.Close
+    End If
+Next
+
+MsgBox "? Batch PDF Export Completed!", vbInformation, "CATIA Automation"
+
+' Release objects
+Set doc = Nothing
+Set fso = Nothing
+Set CATIA = Nothing
+
+End Sub
